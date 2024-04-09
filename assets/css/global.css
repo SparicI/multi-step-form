@@ -1,0 +1,60 @@
+body {
+    font-size: var(--font-size-400);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    background-color: var(--alabaster);
+}
+
+input,
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    margin-block: var(--spacing-100)
+}
+
+
+@supports(height: 100dvh) {
+    main {
+        height: 100dvh;
+    }
+}
+
+main {
+    height: 100vh;
+}
+
+.container {
+    max-inline-size: 1240px;
+    margin-inline: auto;
+    padding: var(--spacing-400);
+}
+
+.flex-row {
+    display: flex;
+}
+
+.flex-row-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 1024px) {
+    .flex-row-space-between-ld {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+}
