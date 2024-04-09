@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="multi-step-form-container">
+      <h1 class="visually-hidden">Multi step form</h1>
       <TheStepIndicator />
       <TheForm />
     </div>
@@ -20,7 +21,7 @@
   }
 
   .multi-step-form-container {
-    background-color: red;
+    background-color: var(--white);
     padding: 1rem;
     border-radius: 10px;
     height: 70vh;

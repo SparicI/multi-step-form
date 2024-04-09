@@ -1,6 +1,6 @@
 <template>
     <ol>
-        <li>
+        <li aria-current="step">
             <span>step 1</span>
             <span>your info</span>
         </li>
