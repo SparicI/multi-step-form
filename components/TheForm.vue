@@ -53,6 +53,18 @@
 
 
             <div class="form__controls">
+                <button
+                    type="button"
+                    class="button button--secondary"
+                >Go Back</button>
+                <button
+                    type="button"
+                    class="button button--primary"
+                >Next Step</button>
+                <!-- <button
+                    type="submit"
+                    class="button button--primary"
+                >Confirm</button> -->
 
 
             </div>

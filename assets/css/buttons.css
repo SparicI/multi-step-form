@@ -1,0 +1,29 @@
+.button {
+    padding: var(--spacing-200) var(--spacing-400);
+    border: none;
+    background-color: transparent;
+    font-weight: var(--font-weight-bolder);
+    transition: all 0.3s linear;
+}
+
+.button:active {
+    scale: 0.95;
+}
+
+.button--primary {
+    border-radius: var(--border-radius-soft);
+    background-color: var(--marine-blue);
+    color: var(--magnolia);
+}
+
+.button--primary:hover {
+    background-color: var(--pastel-blue);
+}
+
+.button--secondary {
+    color: var(--cool-gray);
+}
+
+.button--secondary:hover {
+    color: var(--marine-blue);
+}
