@@ -2,7 +2,8 @@
     <ol class="step__list">
         <li
             aria-current="step"
-            class="step__list-item active"
+            class="step__list-item"
+            :class="{ active: sectionActive === 'step-1' }"
         >
             <p class="step__description">
                 <span class="step__counter">step 1</span>
@@ -10,19 +11,28 @@
             </p>
 
         </li>
-        <li class="step__list-item">
+        <li
+            class="step__list-item"
+            :class="{ active: sectionActive === 'step-2' }"
+        >
             <p class="step__description">
                 <span class="step__counter">step 2</span>
                 <span>select plan</span>
             </p>
         </li>
-        <li class="step__list-item">
+        <li
+            class="step__list-item"
+            :class="{ active: sectionActive === 'step-3' }"
+        >
             <p class="step__description">
                 <span class="step__counter">step 3</span>
                 <span>add-ons</span>
             </p>
         </li>
-        <li class="step__list-item">
+        <li
+            class="step__list-item"
+            :class="{ active: sectionActive === 'step-4' }"
+        >
             <p class="step__description">
                 <span class="step__counter">step 4</span>
                 <span>summary</span>
@@ -35,6 +45,8 @@
     setup
     lang="ts"
 >
+
+const sectionActive = useState('section-active')
 
 </script>
 

@@ -20,14 +20,15 @@
                             for="name"
                             class="form__label"
                         >Name</label>
-                        <span class="error">This field is required</span>
                         <input
                             type="text"
                             v-model="form.name"
                             name="name"
                             id="name"
                             class="form__input"
+                            placeholder="e.g. Matt Surname"
                         >
+                        <span class="error">This field is required</span>
                     </div>
                     <div class="form__group">
                         <label
@@ -41,6 +42,7 @@
                             name="email"
                             id="email"
                             class="form__input"
+                            placeholder="e.g. email@mail.com"
                         >
                     </div>
                     <div class="form__group">
@@ -56,6 +58,7 @@
                             id="phone"
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                             class="form__input"
+                            placeholder="e.g. +1 345 909 090"
                         >
                     </div>
 
@@ -140,11 +143,11 @@
 >
 
 const sections = ['step-1', 'step-2', 'step-3', 'step-4']
-const sectionActive = ref('step-1')
+const sectionActive = useState('section-active', () => 'step-1')
 const form = ref({
-    name: "Some Name",
-    email: 'email@mail.com',
-    phone: "e.g. +1 345 909 090"
+    name: "",
+    email: "",
+    phone: ""
 })
 
 const goBack = () => {
@@ -181,15 +184,30 @@ const nextStep = () => {
     background-color: var(--white);
 }
 
+.form__group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-100);
+    margin-block-end: var(--spacing-400);
+}
+
+.form__input {
+    padding: var(--spacing-200) var(--spacing-400);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-soft);
+}
+
+.error {
+    position: absolute;
+    right: 0;
+}
+
 @media screen and (min-width: 1024px) {
     .form {
         height: 568px;
         padding-inline: var(--spacing-1100);
     }
-
-    /* .form__description {
-        margin-block-end: var(--spacing-800);
-    } */
 
 }
 </style>
