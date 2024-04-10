@@ -1,60 +1,65 @@
 <template>
-    <form action="">
+    <form
+        action=""
+        class="form"
+    >
 
         <section
             id="step-1"
             v-if="sectionActive === sections[0]"
         >
-            <div class="form__description">
-                <h2>Personal info</h2>
-                <p>Please provide your name, email address, and phone number.</p>
-            </div>
+            <div class="form__wrapper">
+                <FormDescriptions
+                    title="Personal info"
+                    description="Please provide your name, email address, and phone number."
+                />
 
-            <div class="form__body">
-                <div class="form__group">
-                    <label
-                        for="name"
-                        class="form__label"
-                    >Name</label>
-                    <span class="error">This field is required</span>
-                    <input
-                        type="text"
-                        v-model="form.name"
-                        name="name"
-                        id="name"
-                        class="form__input"
-                    >
-                </div>
-                <div class="form__group">
-                    <label
-                        for="email"
-                        class="form__label"
-                    >Email Address</label>
-                    <span class="error">This field is required</span>
-                    <input
-                        type="email"
-                        v-model="form.email"
-                        name="email"
-                        id="email"
-                        class="form__input"
-                    >
-                </div>
-                <div class="form__group">
-                    <label
-                        for="phone"
-                        class="form__label"
-                    >Phone Number</label>
-                    <span class="error">This field is required</span>
-                    <input
-                        type="tel"
-                        v-model="form.phone"
-                        name="phone"
-                        id="phone"
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                        class="form__input"
-                    >
-                </div>
+                <div class="form__body">
+                    <div class="form__group">
+                        <label
+                            for="name"
+                            class="form__label"
+                        >Name</label>
+                        <span class="error">This field is required</span>
+                        <input
+                            type="text"
+                            v-model="form.name"
+                            name="name"
+                            id="name"
+                            class="form__input"
+                        >
+                    </div>
+                    <div class="form__group">
+                        <label
+                            for="email"
+                            class="form__label"
+                        >Email Address</label>
+                        <span class="error">This field is required</span>
+                        <input
+                            type="email"
+                            v-model="form.email"
+                            name="email"
+                            id="email"
+                            class="form__input"
+                        >
+                    </div>
+                    <div class="form__group">
+                        <label
+                            for="phone"
+                            class="form__label"
+                        >Phone Number</label>
+                        <span class="error">This field is required</span>
+                        <input
+                            type="tel"
+                            v-model="form.phone"
+                            name="phone"
+                            id="phone"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            class="form__input"
+                        >
+                    </div>
 
+                </div>
             </div>
 
             <FormButtons
@@ -69,11 +74,13 @@
             id="step-2"
             v-if="sectionActive === sections[1]"
         >
-            <div class="form__description">
-                <h2>Select your plan</h2>
-                <p>You have the option of monthly or yearly billing.</p>
+            <div class="form__wrapper">
+                <FormDescriptions
+                    title="Select your plan"
+                    description="You have the option of monthly or yearly billing."
+                />
+                <div class="form__body"></div>
             </div>
-
 
             <FormButtons
                 :currentSection='sectionActive'
@@ -87,16 +94,19 @@
             id="step-3"
             v-if="sectionActive === sections[2]"
         >
-            <div class="form__description">
-                <h2>Pick add-ons</h2>
-                <p>Add-ons help enhance your gaming experience.</p>
+            <div class="form__wrapper">
+                <FormDescriptions
+                    title="Pick add-ons"
+                    description="Add-ons help enhance your gaming experience."
+                />
+                <div class="form__body"></div>
             </div>
-
             <FormButtons
                 :currentSection='sectionActive'
                 @go-back="goBack"
                 @next-step="nextStep"
             />
+
 
         </section>
 
@@ -104,9 +114,12 @@
             id="step-3"
             v-if="sectionActive === sections[3]"
         >
-            <div class="form__description">
-                <h2>Finishing up</h2>
-                <p>Double-check everything looks OK before confirming.</p>
+            <div class="form__wrapper">
+                <FormDescriptions
+                    title="Finishing up"
+                    description="Double-check everything looks OK before confirming."
+                />
+                <div class="form__body"></div>
             </div>
 
             <FormButtons
@@ -155,12 +168,28 @@ const nextStep = () => {
 </script>
 
 <style scoped>
-.form__description h2 {
-    font-size: var(--font-size-800);
+.form {
+    position: relative;
+    height: calc(100vh - 172px);
 }
 
-.form__description p {
-    color: var(--cool-gray);
-    font-weight: var(--font-weight-bold);
+.form__wrapper {
+    width: min(100%, 550px);
+    margin-inline: auto;
+    padding-block: var(--spacing-800);
+    padding-inline: var(--spacing-400);
+    background-color: var(--white);
+}
+
+@media screen and (min-width: 1024px) {
+    .form {
+        height: 568px;
+        padding-inline: var(--spacing-1100);
+    }
+
+    /* .form__description {
+        margin-block-end: var(--spacing-800);
+    } */
+
 }
 </style>

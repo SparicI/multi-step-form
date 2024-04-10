@@ -2,7 +2,7 @@ body {
     font-size: var(--font-size-400);
     font-family: var(--font-family);
     font-weight: var(--font-weight-normal);
-    background-color: var(--alabaster);
+    background-color: var(--magnolia);
 }
 
 input,

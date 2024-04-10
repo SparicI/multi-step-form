@@ -9,6 +9,7 @@
         <button
             :type="currentSection === 'step-4' ? 'submit' : 'button'"
             class="button button--primary"
+            :class="{ 'margin-inline-start-auto': currentSection === 'step-1' }"
             @click="$emit('nextStep')"
         >
             <span v-if="currentSection === 'step-4'">Confirm</span>
@@ -32,4 +33,16 @@ const props = defineProps({
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.form__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--white);
+    padding-block: var(--spacing-800);
+    padding-inline: var(--spacing-1100);
+}
+</style>

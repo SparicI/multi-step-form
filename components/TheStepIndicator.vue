@@ -82,11 +82,11 @@
 @media screen and (min-width: 1024px) {
 
     .step__list {
-        height: 568px;
         flex-direction: column;
-        flex-basis: 30%;
         align-items: flex-start;
         justify-content: flex-start;
+        height: 568px;
+        width: 300px;
         padding: var(--spacing-1000);
 
         background-image: url(/images/bg-sidebar-desktop.svg);

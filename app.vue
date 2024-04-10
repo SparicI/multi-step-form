@@ -25,6 +25,8 @@
     padding: var(--spacing-400);
     border-radius: var(--border-radius-soft);
     min-height: 70vh;
+    max-width: 1024px;
+    margin-inline: auto;
     background-color: var(--white);
   }
 
