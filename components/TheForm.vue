@@ -28,14 +28,14 @@
                             class="form__input"
                             placeholder="e.g. Matt Surname"
                         >
-                        <span class="error">This field is required</span>
+                        <span class="form__error">This field is required</span>
                     </div>
                     <div class="form__group">
                         <label
                             for="email"
                             class="form__label"
                         >Email Address</label>
-                        <span class="error">This field is required</span>
+                        <span class="form__error">This field is required</span>
                         <input
                             type="email"
                             v-model="form.email"
@@ -50,7 +50,7 @@
                             for="phone"
                             class="form__label"
                         >Phone Number</label>
-                        <span class="error">This field is required</span>
+                        <span class="form__error">This field is required</span>
                         <input
                             type="tel"
                             v-model="form.phone"
@@ -198,10 +198,20 @@ const nextStep = () => {
     border-radius: var(--border-radius-soft);
 }
 
-.error {
+.form__error {
     position: absolute;
     right: 0;
 }
+
+/* Add states to all inputs */
+
+input:hover,
+input:active {
+    padding: calc(var(--spacing-200) - 1.5px) calc(var(--spacing-4  00) - 1.5px);
+    border: 1.5px solid var(--purplish-blue)
+}
+
+
 
 @media screen and (min-width: 1024px) {
     .form {
