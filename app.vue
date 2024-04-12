@@ -23,9 +23,9 @@
   .multi-step-form-container {
     display: flex;
     padding: var(--spacing-400);
-    border-radius: var(--border-radius-soft);
+    border-radius: var(--border-radius-10);
     min-height: 70vh;
-    width: min(100%, 1024px);
+    /* width: min(100%, 1024px); */
     margin-inline: auto;
     background-color: var(--white);
   }

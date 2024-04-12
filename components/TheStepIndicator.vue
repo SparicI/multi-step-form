@@ -46,7 +46,7 @@
     lang="ts"
 >
 
-const sectionActive = useState('section-active')
+const sectionActive = useState('section-active', () => 'step-1')
 
 </script>
 

@@ -11,7 +11,7 @@
 }
 
 .button--primary {
-    border-radius: var(--border-radius-soft);
+    border-radius: var(--border-radius-5);
     background-color: var(--marine-blue);
     color: var(--magnolia);
 }

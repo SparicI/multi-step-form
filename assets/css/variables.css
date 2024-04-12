@@ -44,12 +44,16 @@
     --spacing-900: 3rem;
     --spacing-1000: 4rem;
     --spacing-1100: 5rem;
+    --spacing-form: -4rem;
 
     /* Other */
-    --border-radius-soft: 5px;
+    --border-radius-5: 5px;
+    --border-radius-10: 10px;
 
     --box-shadow: 2px 2px 4px rgba(0 0 0 / 0.1);
     --box-shadow-card: 1px 1px 8px rgba(0 0 0 / 0.05);
+
+
 
 
 

@@ -36,13 +36,19 @@ const props = defineProps({
 <style scoped>
 .form__controls {
     position: absolute;
-    bottom: 0;
+    bottom: var(--spacing-form);
     left: 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
     background-color: var(--white);
-    padding-block: var(--spacing-800);
-    padding-inline: var(--spacing-1100);
+    padding: var(--spacing-400);
+}
+
+@media screen and (min-width: 1024px) {
+    .form__controls {
+        bottom: 0;
+    }
+
 }
 </style>

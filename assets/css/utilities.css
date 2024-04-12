@@ -3,6 +3,24 @@
     margin-inline-start: auto;
 }
 
+/* Flex */
+
+.gap-500 {
+    gap: var(--spacing-500);
+}
+
+/* Colors */
+
+.color-purple {
+    color: var(--purplish-blue);
+}
+
+@media screen and (max-width: 480px) {
+    .padding-inline-sd-400 {
+        padding-inline: var(--spacing-400);
+    }
+}
+
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
