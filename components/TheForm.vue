@@ -1,9 +1,10 @@
 <template>
     <form
-        action=""
+        @submit.prevent="formSubmited = true"
         class="form"
     >
 
+        <!----------------------------- SECTION 1 ------------------------------------------- -->
         <section
             id="step-1"
             class="padding-inline-sd-400"
@@ -74,6 +75,7 @@
 
         </section>
 
+        <!----------------------------- SECTION 2 ------------------------------------------- -->
         <section
             class="padding-inline-sd-400"
             id="step-2"
@@ -246,12 +248,14 @@
                 />
                 <div class="form__body">
                     <div class="add-ons__wrapper">
+
                         <!-- Online service -->
                         <input
                             type="checkbox"
                             name="add-ons"
                             id="online-service"
                             value="online-service"
+                            v-model="form.addOns"
                             class="add-ons__input hide-input"
                         />
                         <label
@@ -281,6 +285,7 @@
                             name="add-ons"
                             id="larger-storage"
                             value="larger-storage"
+                            v-model="form.addOns"
                             class="add-ons__input hide-input"
                         />
                         <label
@@ -310,6 +315,7 @@
                             name="add-ons"
                             id="customizable-profile"
                             value="customizable-profile"
+                            v-model="form.addOns"
                             class="add-ons__input hide-input"
                         />
                         <label
@@ -345,23 +351,88 @@
         </section>
 
         <section
-            class="padding-inline-sd-400"
+            class="padding-inline-sd-400 height-100"
             id="step-3"
             v-if="sectionActive === sections[3]"
         >
-            <div class="form__wrapper">
-                <FormDescriptions
-                    title="Finishing up"
-                    description="Double-check everything looks OK before confirming."
+            <div v-if="formSubmited === false">
+                <div class="form__wrapper">
+                    <FormDescriptions
+                        title="Finishing up"
+                        description="Double-check everything looks OK before confirming."
+                    />
+                    <div class="form__body">
+                        <div class="summary__details">
+                            <div class="summary__item summary__item--top">
+                                <div>
+                                    <p>{{ paymentOptions?.[form.selectPlan as keyof PaymentOptions]?.title }}
+                                        ({{ form.selectPeriod }})</p>
+                                    <button
+                                        @click="sectionActive = sections[1]"
+                                        class="summary__button"
+                                    >Change</button>
+                                </div>
+                                <p>${{ paymentOptions?.[form.selectPlan as keyof
+            PaymentOptions]?.[form.selectPeriod]
+                                    }}/<span v-if="form.selectPeriod === 'monthly'">mo
+                                    </span>
+                                    <span v-else>yr</span>
+                                </p>
+                            </div>
+                            <div
+                                class="summary__item summary__item--bottom"
+                                v-for="item in form.addOns"
+                            >
+                                <p class="color-grey">{{ paymentOptions?.[item]?.title }}</p>
+                                <p>+${{ paymentOptions?.[item as keyof typeof paymentOptions]?.[form.selectPeriod]
+                                    }}/<span v-if="form.selectPeriod === 'monthly'">mo
+                                    </span>
+                                    <span v-else>yr</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="summary__total">
+                            <div class="summary__item">
+                                <p class="color-grey">Total
+                                    <span v-if="form.selectPeriod === 'monthly'">(per month)</span>
+                                    <span v-else>(per year)</span>
+                                </p>
+                                <p class="color-purple font-weight-bolder font-size-600">
+                                    +${{ totalPrice
+                                    }}/<span v-if="form.selectPeriod === 'monthly'">mo
+                                    </span>
+                                    <span v-else>yr</span>
+                                </p>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <FormButtons
+                    :currentSection='sectionActive'
+                    @go-back="goBack"
+                    @next-step="nextStep"
                 />
-                <div class="form__body"></div>
+
             </div>
 
-            <FormButtons
-                :currentSection='sectionActive'
-                @go-back="goBack"
-                @next-step="nextStep"
-            />
+            <div
+                v-else
+                class="form__success"
+            >
+                <img
+                    src="/images/icon-thank-you.svg"
+                    alt="Thank you"
+                >
+                <FormDescriptions
+                    title="Thank you!"
+                    description="Thanks for confirming your subscription! We hope you have fun using this platform. If you need support, please feel free to email us at support@loremgaming.com"
+                />
+
+            </div>
 
         </section>
 
@@ -374,14 +445,74 @@
     lang="ts"
 >
 
+type PaymentOptions = {
+    [category: string]: {
+        [category: string]: string | number,
+    }
+}
+
+type Form = {
+    name: string,
+    email: string,
+    phone: string,
+    selectPlan: string,
+    selectPeriod: string,
+    addOns: string[]
+}
+
+const paymentOptions: PaymentOptions = {
+    arcade: {
+        title: 'Arcade',
+        monthly: 9,
+        yearly: 90
+    },
+    advanced: {
+        title: 'Advanced',
+        monthly: 12,
+        yearly: 120
+    },
+    pro: {
+        title: 'Pro',
+        monthly: 15,
+        yearly: 150
+    },
+    'online-service': {
+        title: 'Online service',
+        monthly: 1,
+        yearly: 10
+    },
+    'larger-storage': {
+        title: 'Larger storage',
+        monthly: 2,
+        yearly: 20
+    },
+    'customizable-profile': {
+        title: 'Customizable profile',
+        monthly: 2,
+        yearly: 20
+    },
+
+}
+
 const sections = ['step-1', 'step-2', 'step-3', 'step-4']
 const sectionActive = useState('section-active', () => 'step-1')
-const form = ref({
+const formSubmited = ref(false)
+const form = ref<Form>({
     name: '',
     email: '',
     phone: '',
     selectPlan: 'arcade',
-    selectPeriod: 'monthly'
+    selectPeriod: 'monthly',
+    addOns: []
+})
+
+const totalPrice = computed(() => {
+    const addOns = form.value.addOns.reduce((acc: number, current: string) => {
+        const temp: number = paymentOptions?.[current]?.[form.value.selectPeriod] as number
+        acc += temp
+        return acc
+    }, 0) as number
+    return (paymentOptions?.[form.value.selectPlan]?.[form.value.selectPeriod] as number) + addOns
 })
 
 
@@ -403,9 +534,10 @@ const nextStep = () => {
     }
 }
 
+
 </script>
 
-<style scoped>
+<style>
 .form {
     position: relative;
     height: calc(100vh - 172px);
@@ -601,11 +733,9 @@ input:active {
 }
 
 .add-ons__input:checked+.add-ons__label::before {
-    content: "\2713";
+    content: url(/public/images/icon-checkmark.svg);
     display: grid;
     place-content: center;
-    color: var(--white);
-    border: 1px solid var(--purplish-blue);
     background-color: var(--purplish-blue);
 }
 
@@ -614,6 +744,56 @@ input:active {
     flex-direction: column;
 }
 
+/* Summary */
+
+.summary__details {
+    padding: var(--spacing-500);
+    border-radius: var(--border-radius-10);
+    background-color: var(--magnolia);
+}
+
+.summary__total {
+    padding: var(--spacing-500);
+}
+
+.summary__item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary__item--top {
+    padding-block-end: var(--spacing-700);
+    border-bottom: 1px solid var(--light-gray);
+    font-weight: var(--font-weight-bolder);
+}
+
+.summary__item--bottom {
+    margin-block-start: var(--spacing-400);
+}
+
+.summary__button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: underline;
+    color: var(--cool-gray);
+    font-weight: var(--font-weight-normal);
+}
+
+.form__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-800);
+    height: 100%;
+    text-align: center;
+}
+
+.form__success .form__description h2 {
+    margin-block-end: var(--spacing-500)
+}
 
 
 @media screen and (min-width: 1024px) {
