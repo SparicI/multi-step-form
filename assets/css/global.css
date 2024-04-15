@@ -15,20 +15,14 @@ a {
     color: inherit;
 }
 
-@supports(height: 100dvh) {
-    main {
-        height: 100dvh;
-    }
-}
-
 main {
     height: 100vh;
 }
 
-.container {
-    max-inline-size: 1240px;
-    margin-inline: auto;
-    padding: var(--spacing-400);
+@supports(height: 100dvh) {
+    main {
+        height: 100dvh;
+    }
 }
 
 .flex-row {
@@ -51,10 +45,7 @@ main {
     position: absolute;
 }
 
-@media screen and (min-width: 1024px) {
-    .flex-row-space-between-ld {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-    }
+.input-border {
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-soft);
 }

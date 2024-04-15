@@ -17,69 +17,69 @@
                 />
 
                 <div class="form__body">
-                    <div class="form__group">
+                    <div class="profile__group flex-column">
                         <label
                             for="name"
-                            class="form__label"
+                            class="profile__label"
                         >Name</label>
                         <input
                             type="text"
                             v-model="form.name"
                             name="name"
                             id="name"
-                            class="form__input"
+                            class="profile__input input-border"
                             :class="{ error: error?.name === true }"
                             placeholder="e.g. Matt Surname"
                             required
                         >
                         <span
-                            class="form__error"
+                            class="profile__error"
                             v-if="error.name"
                         >This field is required</span>
                     </div>
-                    <div class="form__group">
+                    <div class="profile__group flex-column">
                         <label
                             for="email"
-                            class="form__label"
+                            class="profile__label"
                         >Email Address</label>
                         <input
                             type="email"
                             v-model="form.email"
                             name="email"
                             id="email"
-                            class="form__input"
+                            class="profile__input input-border"
                             :class="{ error: error?.email === true || error?.emailPattern }"
                             placeholder="e.g. email@mail.com"
                             required
                         >
                         <span
-                            class="form__error"
+                            class="profile__error"
                             v-if="error.email"
                         >This field is required</span>
                         <span
-                            class="form__error"
+                            class="profile__error"
                             v-if="error.emailPattern"
                         >
                             Invalid format
                         </span>
                     </div>
-                    <div class="form__group">
+                    <div class="profile__group flex-column">
                         <label
                             for="phone"
-                            class="form__label"
+                            class="profile__label"
                         >Phone Number</label>
                         <input
                             type="tel"
                             v-model="form.phone"
                             name="phone"
                             id="phone"
-                            class="form__input"
+                            class="profile__input input-border"
                             :class="{ error: error?.phone === true }"
                             placeholder="e.g. +1 345 909 090"
                             required
                         >
                         <span
-                            class="form__error"
+                            class="profile__error"
                             v-if="error.phone"
                         >This field is required</span>
                     </div>
@@ -107,7 +107,7 @@
                     description="You have the option of monthly or yearly billing."
                 />
                 <div class="form__body">
-                    <div class="plan__wrapper">
+                    <div class="plan__wrapper flex-column">
                         <!-- Arcade plan -->
                         <input
                             type="radio"
@@ -118,13 +118,13 @@
                         />
                         <label
                             for="arcade"
-                            class="plan__label"
+                            class="plan__label input-border "
                         >
                             <img
                                 src="/images/icon-arcade.svg"
                                 alt="Arcade plan"
                             >
-                            <span class="plan__description">
+                            <span class="flex-column">
                                 <span class="plan__title">Arcade</span>
                                 <span
                                     class="plan__price"
@@ -150,14 +150,14 @@
                         />
                         <label
                             for="advanced"
-                            class="plan__label"
+                            class="plan__label input-border"
                         >
                             <img
                                 src="/images/icon-advanced.svg"
                                 alt="Arcade plan"
                             >
 
-                            <span class="plan__description">
+                            <span class="flex-column">
                                 <span class="plan__title">Advanced</span>
                                 <span
                                     class="plan__price"
@@ -183,14 +183,14 @@
                         />
                         <label
                             for="pro"
-                            class="plan__label"
+                            class="plan__label input-border"
                         >
                             <img
                                 src="/images/icon-pro.svg"
                                 alt="Arcade plan"
                             >
 
-                            <span class="plan__description">
+                            <span class="flex-column">
                                 <span class="plan__title">Pro</span>
                                 <span
                                     class="plan__price"
@@ -268,7 +268,7 @@
                     description="Add-ons help enhance your gaming experience."
                 />
                 <div class="form__body">
-                    <div class="add-ons__wrapper">
+                    <div class="add-ons__wrapper flex-column">
 
                         <!-- Online service -->
                         <input
@@ -281,11 +281,11 @@
                         />
                         <label
                             for="online-service"
-                            class="add-ons__label"
+                            class="add-ons__label flex-row-space-between flex-row-space-between input-border"
                         >
                             <span class="flex-row gap-500">
 
-                                <span class="add-ons__desc">
+                                <span class="flex-column">
                                     <span class="plan__title">Online service</span>
                                     <span class="plan__price">Access to multiplayer games</span>
                                 </span>
@@ -311,11 +311,11 @@
                         />
                         <label
                             for="larger-storage"
-                            class="add-ons__label"
+                            class="add-ons__label flex-row-space-between input-border"
                         >
                             <span class="flex-row gap-500">
 
-                                <span class="add-ons__desc">
+                                <span class="flex-column">
                                     <span class="plan__title">Larger storage</span>
                                     <span class="plan__price">Extra 1TB of cloud save</span>
                                 </span>
@@ -341,11 +341,11 @@
                         />
                         <label
                             for="customizable-profile"
-                            class="add-ons__label"
+                            class="add-ons__label flex-row-space-between input-border"
                         >
                             <span class="flex-row gap-500">
 
-                                <span class="add-ons__desc">
+                                <span class="flex-column">
                                     <span class="plan__title">Customizable profile</span>
                                     <span class="plan__price">Custom theme on your profile.</span>
                                 </span>
@@ -385,7 +385,7 @@
                     />
                     <div class="form__body">
                         <div class="summary__details">
-                            <div class="summary__item summary__item--top">
+                            <div class="flex-row-space-between summary__item--top">
                                 <div>
                                     <p>{{ paymentOptions?.[form.selectPlan as keyof PaymentOptions]?.title }}
                                         ({{ form.selectPeriod }})</p>
@@ -402,7 +402,7 @@
                                 </p>
                             </div>
                             <div
-                                class="summary__item summary__item--bottom"
+                                class="flex-row-space-between summary__item--bottom"
                                 v-for="item in form.addOns"
                             >
                                 <p class="color-grey">{{ paymentOptions?.[item]?.title }}</p>
@@ -443,7 +443,7 @@
 
             <div
                 v-else
-                class="form__success"
+                class="form__success flex-column"
             >
                 <img
                     src="/images/icon-thank-you.svg"
@@ -624,39 +624,35 @@ const nextStep = () => {
     background-color: var(--white);
 }
 
-.form__group {
+/* ------------------------------------------ Profile ------------------------------------------------- */
+
+.profile__group {
     position: relative;
-    display: flex;
-    flex-direction: column;
     gap: var(--spacing-100);
     margin-block-end: var(--spacing-400);
 }
 
-.form__input {
+.profile__input {
     padding: var(--spacing-200) var(--spacing-400);
-    border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius-5);
 }
 
-.form__error {
+.profile__error {
     position: absolute;
     right: 0;
     font-weight: var(--font-weight-bold);
     color: var(--strawberry-red);
 }
 
-.form__input.error {
+.profile__input.error {
     border: 1px solid var(--strawberry-red);
 }
 
 
 
-/* Section SELECT PLAN */
+/* --------------------------------------- SELECT PLAN --------------------------------------------- */
 
 .plan__wrapper,
 .add-ons__wrapper {
-    display: flex;
-    flex-direction: column;
     gap: var(--spacing-400)
 }
 
@@ -665,14 +661,6 @@ const nextStep = () => {
     align-items: flex-start;
     gap: var(--spacing-900);
     padding: var(--spacing-400);
-    border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius-5);
-}
-
-
-.plan__description {
-    display: flex;
-    flex-direction: column;
 }
 
 .plan__title {
@@ -689,7 +677,7 @@ const nextStep = () => {
     color: var(--marine-blue);
 }
 
-/* Period */
+/* ---------------------------------- Period ------------------------------------------ */
 
 .period__wrapper {
     display: flex;
@@ -730,8 +718,6 @@ const nextStep = () => {
     border-radius: 50%;
     background: var(--white);
     transition: all 0.3s ease-in;
-    z-index: 10;
-    pointer-events: none;
 }
 
 .period__input--left:checked+.period__overlay {
@@ -762,39 +748,12 @@ const nextStep = () => {
     left: 60px;
 }
 
-/* Add states to all inputs */
-
-
-.plan__input:checked+.plan__label,
-.plan__label:hover {
-    border: 1.5px solid var(--purplish-blue);
-    padding: calc(var(--spacing-400) - 0.5px);
-}
-
-.add-ons__label:hover,
-.add-ons__input:checked+.add-ons__label {
-    border: 1.5px solid var(--purplish-blue);
-    padding-block: calc(var(--spacing-400) - 0.5px);
-    padding-inline: calc(60px - 0.5px) calc(var(--spacing-400) - 0.5px);
-}
-
-/* input:hover,
-input:active {
-    padding: calc(var(--spacing-200) - 0.5px) calc(var(--spacing-400) - 0.5px);
-    border: 1.5px solid var(--purplish-blue)
-} */
-
-/* Add-ons */
+/*  ---------------------------------------- Add-ons -------------------------------------------- */
 
 .add-ons__label {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding-block: var(--spacing-400);
     padding-inline: 60px var(--spacing-400);
-    border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius-10);
 }
 
 .add-ons__label::before {
@@ -804,7 +763,7 @@ input:active {
     height: 20px;
     width: 20px;
     border: 1px solid var(--light-gray);
-    border-radius: var(--border-radius-5);
+    border-radius: var(--border-radius-soft);
 }
 
 .add-ons__input:checked+.add-ons__label::before {
@@ -814,12 +773,7 @@ input:active {
     background-color: var(--purplish-blue);
 }
 
-.add-ons__desc {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Summary */
+/* ------------------------------------------ Summary ------------------------------------------------- */
 
 .summary__details {
     padding: var(--spacing-500);
@@ -829,11 +783,6 @@ input:active {
 
 .summary__total {
     padding: var(--spacing-500);
-}
-
-.summary__item {
-    display: flex;
-    justify-content: space-between;
 }
 
 .summary__item--top {
@@ -857,8 +806,6 @@ input:active {
 }
 
 .form__success {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-800);
@@ -869,6 +816,27 @@ input:active {
 .form__success .form__description h2 {
     margin-block-end: var(--spacing-500)
 }
+
+/* ------------------------------------------- Add states to all inputs ------------------------------------------ */
+
+.plan__input:checked+.plan__label,
+.plan__label:hover {
+    border: 1.5px solid var(--purplish-blue);
+    padding: calc(var(--spacing-400) - 0.5px);
+}
+
+.add-ons__label:hover,
+.add-ons__input:checked+.add-ons__label {
+    border: 1.5px solid var(--purplish-blue);
+    padding-block: calc(var(--spacing-400) - 0.5px);
+    padding-inline: calc(60px - 0.5px) calc(var(--spacing-400) - 0.5px);
+}
+
+.profile__input:hover {
+    border: 1.5px solid var(--purplish-blue);
+    padding: calc(var(--spacing-200) - 0.5px) calc(var(--spacing-400) - 0.5px);
+}
+
 
 
 @media screen and (min-width: 1024px) {
