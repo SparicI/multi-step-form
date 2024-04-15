@@ -4,7 +4,7 @@
         class="form"
     >
 
-        <!----------------------------- SECTION 1 ------------------------------------------- -->
+        <!----------------------------- SECTION PERSONAL INFO ------------------------------------------- -->
         <section
             id="step-1"
             class="padding-inline-sd-400"
@@ -28,40 +28,60 @@
                             name="name"
                             id="name"
                             class="form__input"
+                            :class="{ error: error?.name === true }"
                             placeholder="e.g. Matt Surname"
+                            required
                         >
-                        <span class="form__error">This field is required</span>
+                        <span
+                            class="form__error"
+                            v-if="error.name"
+                        >This field is required</span>
                     </div>
                     <div class="form__group">
                         <label
                             for="email"
                             class="form__label"
                         >Email Address</label>
-                        <span class="form__error">This field is required</span>
                         <input
                             type="email"
                             v-model="form.email"
                             name="email"
                             id="email"
                             class="form__input"
+                            :class="{ error: error?.email === true || error?.emailPattern }"
                             placeholder="e.g. email@mail.com"
+                            required
                         >
+                        <span
+                            class="form__error"
+                            v-if="error.email"
+                        >This field is required</span>
+                        <span
+                            class="form__error"
+                            v-if="error.emailPattern"
+                        >
+                            The email address is not formatted correctly
+                        </span>
                     </div>
                     <div class="form__group">
                         <label
                             for="phone"
                             class="form__label"
                         >Phone Number</label>
-                        <span class="form__error">This field is required</span>
                         <input
                             type="tel"
                             v-model="form.phone"
                             name="phone"
                             id="phone"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                             class="form__input"
+                            :class="{ error: error?.phone === true }"
                             placeholder="e.g. +1 345 909 090"
+                            required
                         >
+                        <span
+                            class="form__error"
+                            v-if="error.phone"
+                        >This field is required</span>
                     </div>
 
                 </div>
@@ -75,7 +95,7 @@
 
         </section>
 
-        <!----------------------------- SECTION 2 ------------------------------------------- -->
+        <!----------------------------- SECTION SELECT PLAN ------------------------------------------- -->
         <section
             class="padding-inline-sd-400"
             id="step-2"
@@ -236,6 +256,7 @@
 
         </section>
 
+        <!----------------------------- SECTION PICK ADD-ONS ------------------------------------------- -->
         <section
             class="padding-inline-sd-400"
             id="step-3"
@@ -350,6 +371,7 @@
 
         </section>
 
+        <!----------------------------- SECTION SUMMARY  --------------------------------------------- -->
         <section
             class="padding-inline-sd-400 height-100"
             id="step-3"
@@ -506,6 +528,13 @@ const form = ref<Form>({
     addOns: []
 })
 
+const error = ref({
+    name: false,
+    email: false,
+    emailPattern: false,
+    phone: false
+})
+
 const totalPrice = computed(() => {
     const addOns = form.value.addOns.reduce((acc: number, current: string) => {
         const temp: number = paymentOptions?.[current]?.[form.value.selectPeriod] as number
@@ -515,6 +544,43 @@ const totalPrice = computed(() => {
     return (paymentOptions?.[form.value.selectPlan]?.[form.value.selectPeriod] as number) + addOns
 })
 
+// Validate form
+
+const validateProfileSection = () => {
+    let result = true
+    if (!form?.value.name) {
+        error.value.name = true
+        result = false
+    }
+
+    if (!form?.value.email) {
+        error.value.email = true
+        result = false
+    }
+
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
+    if (form?.value.email && !regexEmail.test(form?.value.email)) {
+        error.value.emailPattern = true
+        result = false
+    }
+
+    if (!form?.value.phone) {
+        error.value.phone = true
+        result = false
+    }
+
+    return result
+}
+
+// Reset form errors
+
+const resetFormErrors = () => {
+    error.value.name = false
+    error.value.email = false
+    error.value.emailPattern = false
+    error.value.phone = false
+}
 
 const goBack = () => {
     const currentIndex = sections.findIndex(item => item === sectionActive.value)
@@ -527,6 +593,10 @@ const goBack = () => {
 
 const nextStep = () => {
     const currentIndex = sections.findIndex(item => item === sectionActive.value)
+    resetFormErrors()
+    if (currentIndex === 0 && !validateProfileSection()) {
+        return
+    }
     if (currentIndex === sections.length - 1) {
         sectionActive.value = sections[sections.length - 1]
     } else {
@@ -571,7 +641,15 @@ const nextStep = () => {
 .form__error {
     position: absolute;
     right: 0;
+    font-weight: var(--font-weight-bolder);
+    color: var(--strawberry-red);
 }
+
+.form__input.error {
+    border: 1px solid var(--strawberry-red);
+}
+
+
 
 /* Section SELECT PLAN */
 
@@ -686,9 +764,6 @@ const nextStep = () => {
 
 /* Add states to all inputs */
 
-/* input:checked+label {
-    border: 1.5px solid var(--purplish-blue);
-} */
 
 .plan__input:checked+.plan__label,
 .plan__label:hover {
