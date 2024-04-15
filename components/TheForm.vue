@@ -60,7 +60,7 @@
                             class="form__error"
                             v-if="error.emailPattern"
                         >
-                            The email address is not formatted correctly
+                            Invalid format
                         </span>
                     </div>
                     <div class="form__group">
@@ -641,7 +641,7 @@ const nextStep = () => {
 .form__error {
     position: absolute;
     right: 0;
-    font-weight: var(--font-weight-bolder);
+    font-weight: var(--font-weight-bold);
     color: var(--strawberry-red);
 }
 

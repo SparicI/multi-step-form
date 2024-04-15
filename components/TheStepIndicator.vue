@@ -51,6 +51,11 @@ const sectionActive = useState('section-active', () => 'step-1')
 </script>
 
 <style scoped>
+ol {
+    margin: 0;
+    padding: 0;
+}
+
 .step__list {
     display: flex;
     gap: var(--spacing-400);
