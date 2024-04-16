@@ -1,7 +1,7 @@
 <template>
     <ol class="step__list">
         <li
-            aria-current="step"
+            :aria-current="sectionActive === 'step-1' ? 'step' : 'false'"
             class="step__list-item"
             :class="{ active: sectionActive === 'step-1' }"
         >
@@ -12,6 +12,7 @@
 
         </li>
         <li
+            :aria-current="sectionActive === 'step-2' ? 'step' : 'false'"
             class="step__list-item"
             :class="{ active: sectionActive === 'step-2' }"
         >
@@ -21,6 +22,7 @@
             </p>
         </li>
         <li
+            :aria-current="sectionActive === 'step-3' ? 'step' : 'false'"
             class="step__list-item"
             :class="{ active: sectionActive === 'step-3' }"
         >
@@ -30,6 +32,7 @@
             </p>
         </li>
         <li
+            :aria-current="sectionActive === 'step-4' ? 'step' : 'false'"
             class="step__list-item"
             :class="{ active: sectionActive === 'step-4' }"
         >

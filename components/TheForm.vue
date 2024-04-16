@@ -29,7 +29,7 @@
                             id="name"
                             class="profile__input input-border"
                             :class="{ error: error?.name === true }"
-                            placeholder="e.g. Matt Surname"
+                            placeholder="e.g. Matt Appleseed"
                             required
                         >
                         <span
