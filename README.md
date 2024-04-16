@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Frontend Mentor Interactive card details form solution](/images/screenshot.png)
+![Frontend Mentor Interactive card details form solution](/public/images/screenshot.png)
 
 ### Links
 
